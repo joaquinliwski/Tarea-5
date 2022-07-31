@@ -43,18 +43,17 @@ ggsave(filename="Outputs/original1.png",plot=p2,width=16, height=10,units = "cm"
 #new data (for labels)
 dfn2<-dfn%>%group_by(LeadStudio,Genre)%>%summarise(WorldGross=sum(WorldGross,na.rm=T))
 #changed plots
-p2prime<- ggplot(dfn2,aes(x=reorder(Genre,WorldGross),y=WorldGross,fill=LeadStudio,label = round(WorldGross))) +
+p2prime<- ggplot(dfn2,aes(x=reorder(Genre,WorldGross),y=WorldGross,fill=LeadStudio)) +
   geom_bar(stat="Identity",position="stack")+
-  geom_text_repel(size = 3, position =position_stack(vjust =0.2))+
   theme_minimal()+
   coord_flip()+
+  geom_text_repel(data=filter(dfn2,Genre=="Action"),aes(label=LeadStudio) , position =position_stack(0.5))+
   scale_fill_brewer(palette="Set3")+
   labs(y = "World Gross", x = "Genre",
        title = "Hollywood Movies by Genre 2013",
        fill="Lead Studio"
        )+
-  theme(legend.position = c(0.7, 0.5),
-        panel.grid = element_blank())
+  theme(panel.grid = element_blank(),legend.position = "none")
 ggsave(filename="Outputs/changed1.png",plot=p2prime,width=16, height=10,units = "cm")
 
 
