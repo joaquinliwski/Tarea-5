@@ -50,7 +50,7 @@ p2prime<- ggplot(dfn2,aes(x=reorder(Genre,WorldGross),y=WorldGross,fill=LeadStud
   coord_flip()+
   scale_fill_brewer(palette="Set3")+
   labs(y = "World Gross", x = "Genre",
-       title = "Hollywood Movies by Gender 2013",
+       title = "Hollywood Movies by Genre 2013",
        fill="Lead Studio"
        )+
   theme(legend.position = c(0.7, 0.5),
